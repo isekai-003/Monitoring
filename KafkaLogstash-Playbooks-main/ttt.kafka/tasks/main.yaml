@@ -254,7 +254,7 @@
     name: zookeeper
     state: started
     enabled: yes
-  when: zookeeper_start
+  when: zookeeper_restart
   tags:
     - zookeeper_service
 
