@@ -1,9 +1,9 @@
 pipeline {
   agent { label 'jenkins-ssh-slave' }
   stages {
-    stage('Hello') {
+    stage('Beats-Installation') {
       steps {
-        sh 'ansible-playbook beats.yml'
+        sh 'ansible-playbook /opt/build/workspace/beats installation/Elastic-Project-main/beats.yml'
       }
     }
   }
