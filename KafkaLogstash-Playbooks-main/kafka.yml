@@ -1,5 +1,5 @@
 ---
-- hosts: kafkalogsrv
+- hosts: all
   roles:
     - role: ttt.java
     - role: ttt.kafka
