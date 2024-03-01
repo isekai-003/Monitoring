@@ -2,6 +2,7 @@
 # The Apache Kafka version to be downloaded and installed
 # kafka_download_base_url should be set to https://archive.apache.org/dist/kafka/ for older versions than the current
 kafka_download_base_url: https://downloads.apache.org/kafka
+kafka_download_validate_certs: yes
 kafka_version: 3.5.1
 kafka_scala_version: 2.13
 
@@ -20,10 +21,7 @@ kafka_log_dir: /var/log/kafka
 kafka_start: yes
 # Restart kafka on configuration change
 kafka_restart: yes
-# Start zookeeper after installation
-zookeeper_start: yes
-# Restart zookeeper on configuration change
-zookeeper_restart: yes
+
 ############################# Server #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
@@ -42,17 +40,16 @@ kafka_background_threads: 10
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
 #listeners=PLAINTEXT://:9092
-kafka_listener_protocol: PLAINTEXT
-kafka_listener_hostname: 13.233.237.15
-kafka_listener_port: 9092
+kafka_listeners:
+  - "PLAINTEXT://13.233.237.15:9092"
 
 # Hostname and port the broker will advertise to producers and consumers. If not set,
 # it uses the value for "listeners" if configured.  Otherwise, it will use the value
 # returned from java.net.InetAddress.getCanonicalHostName().
 #advertised.listeners=PLAINTEXT://your.host.name:9092
-kafka_advertised_listener_protocol: "{{ kafka_listener_protocol }}"
-kafka_advertised_listener_hostname: "{{ kafka_listener_hostname }}"
-kafka_advertised_listener_port: "{{ kafka_listener_port }}"
+# kafka_advertised_listeners:
+#   - "SASL_SSL://:9094"
+#   - "PLAINTEXT://:9092"
 
 # The number of threads handling network requests
 kafka_num_network_threads: 3
@@ -165,21 +162,35 @@ kafka_connect_offset_storage_file_filename: /tmp/connect.offsets
 
 ############################# Producer #############################
 
-kafka_producer_bootstrap_servers: "localhost:9092"
+kafka_producer_bootstrap_servers: "13.233.237.15:9092"
 kafka_producer_compression_type: none
 
 ############################# Consumer #############################
 
 kafka_consumer_group_id: kafka-consumer-group
-kafka_consumer_bootstrap_servers: "localhost:9092"
+kafka_consumer_bootstrap_servers: "13.233.237.15:9092"
 
-################################ Create Topic #########################
+# Example authentication
+############################# AUTHENTICATION #############################
+# kafka_listener_auth:
+#   - name: "listener.name.sasl_ssl.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule"
+#     username: "admin"
+#     password: "admin-secret"
+#     users:
+#       - user: "test1"
+#         pass: "test1-secret"
+#       - user: "test2"
+#         pass: "test2-secret"
+#
+# kafka_sasl_enabled_mechanisms: "PLAIN"
+# kafka_ssl:
+#   cipher_suites: "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384"
+#   truststore_location: "/etc/security/broker.keystore.jks"
+#   truststore_password: "secret"
+#   keystore_location: "/etc/security/broker.keystore.jks"
+#   keystore_password: "secret"
+#   key_password: "secret"
+#   client_auth: "required"
 
-
-default_kafka_topics:
-## Create a test topic with retention.ms set
-  - name: AAMSNEW
-    state: present # optional defaults to true
-    config:
-       - item: retention.ms
-         value: 3600000
+# Here you can define custom opts e.g. settings for JMX Exporter
+# kafka_opts: ""
