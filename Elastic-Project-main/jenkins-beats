@@ -1,7 +1,7 @@
 pipeline {
   agent { label 'jenkins-ssh-slave' }
   stages {
-    stage('Hello') {
+    stage('Beats-Installation') {
       steps {
         sh 'ansible-playbook beats.yml'
       }
