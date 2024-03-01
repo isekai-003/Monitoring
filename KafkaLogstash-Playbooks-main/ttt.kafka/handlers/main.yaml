@@ -23,3 +23,11 @@
     state: restarted
     daemon_reload: yes
   when: zookeeper_restart
+
+
+- name: Start ZooKeeper service
+  systemd:
+    name: zookeeper.service
+    state: started
+    daemon_reload: yes
+  when: zookeeper_start
