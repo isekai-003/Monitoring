@@ -249,14 +249,7 @@
   tags:
     - kafka_service
 
-- name: Start the ZooKeeper service
-  systemd:
-    name: zookeeper
-    state: started
-    enabled: yes
-  when: zookeeper_start
-  tags:
-    - zookeeper_service
+
 
 - name: Install and start the kafka service
   service:
