@@ -1,0 +1,11 @@
+pipeline {
+  agent { label 'jenkins-ssh-slave' }
+  stages {
+    stage('Beats-Installation') {
+      steps {
+        sh 'ansible-playbook beats.yml'
+      }
+    }
+    
+  }
+}
