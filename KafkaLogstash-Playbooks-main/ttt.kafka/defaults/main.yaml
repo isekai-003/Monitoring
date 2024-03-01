@@ -43,7 +43,7 @@ kafka_background_threads: 10
 #     listeners = PLAINTEXT://your.host.name:9092
 #listeners=PLAINTEXT://:9092
 kafka_listener_protocol: PLAINTEXT
-kafka_listener_hostname: localhost
+kafka_listener_hostname: 13.233.237.15
 kafka_listener_port: 9092
 
 # Hostname and port the broker will advertise to producers and consumers. If not set,
@@ -145,7 +145,7 @@ kafka_log_cleaner_backoff_ms: 15000
 
 ########################### Kafka Connect #############################
 
-kafka_connect_bootstrap_servers: "localhost:9092"
+kafka_connect_bootstrap_servers: "13.233.237.15:9092"
 kafka_connect_group_id: connect-cluster
 kafka_connect_key_converter: org.apache.kafka.connect.json.JsonConverter
 kafka_connect_value_converter: org.apache.kafka.connect.json.JsonConverter
