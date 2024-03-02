@@ -21,6 +21,10 @@ kafka_log_dir: /var/log/kafka
 kafka_start: yes
 # Restart kafka on configuration change
 kafka_restart: yes
+# Start zookeeper after installation
+zookeeper_start: yes
+# Restart zookeeper on configuration change
+zookeeper_restart: yes
 
 ############################# Server #############################
 
