@@ -12,7 +12,7 @@ pipeline {
         stage('install elasticsearch')
         {
             steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/DevopsFactoryTTT/Elastic-Project.git']]])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/isekai-003/Monitoring.git']])
             sh 'kubectl apply -f elasticsearch-install.yaml'
             sh 'kubectl apply -f kibana-install.yaml'
             }
